@@ -4,9 +4,12 @@ const SearchBar = () => {
 
 
     return (
-        <div>
-            <form>
-                <input type="text" placeholder='Search Term Here'/>
+        <div className='ui segment'>
+            <form className='ui form'>
+                <div className='field'>
+                    <label htmlFor="search">Image Search</label>
+                    <input id="search" type="text" placeholder='Search Term Here'/>
+                </div>
             </form>
         </div>
     )
