@@ -1,22 +1,17 @@
 import React, { useState } from 'react';
-import axios from 'axios';
+import unsplash from '../api/unsplash';
 import SearchBar from './SearchBar';
 
 import '../styles/app.css';
+import ImageList from './ImageList';
 
 const App = () => {
     const [images, setImages] = useState([]);
 
     const onSearchSubmit = async term => {
-        const response = await axios.get(
-            'https://api.unsplash.com/search/photos',
-            {
-                params: { query: term },
-                headers: {
-                    Authorization: `Client-ID ${process.env.REACT_APP_UNSPLASH_API_KEY}`,
-                },
-            }
-        );
+        const response = await unsplash.get('/search/photos', {
+            params: { query: term },
+        });
 
         setImages(response.data.results);
     };
@@ -24,7 +19,7 @@ const App = () => {
     return (
         <div className='hdr ui container '>
             <SearchBar onSubmit={onSearchSubmit} />
-            Found: {images.length} images
+            <ImageList images={images} />
         </div>
     );
 };
